@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'details.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="detail-page-container">
+    <div class="media-container">
+        {% if media.file_type == 'video' %}
+        <video id="video_player" src="{{ media.file.url }}" controls></video>
+        {% else %}
+        <img id="image_viewer" src="{{ media.file.url }}" alt="{{ media.title }}" style="max-width: 100%;">
+        {% endif %}
+    </div>
+
+    <!-- <div class="media-details-container">   -->
+    <div class="media-details">
+        <h1>{{ media.title }}</h1>
+        <p>{{ media.description }}</p>
+        <p>File Type: {{ media.file_type }}</p>
+        <p>File Size: {{ media.file_size }}</p>
+        <p>Owner: {{ media.owner.username }}</p>
+        <p>Uploaded At: {{ media.uploaded_at }}</p>
+    </div>
+
+    {% endblock %}

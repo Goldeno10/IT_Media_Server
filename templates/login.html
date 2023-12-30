@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+<style>
+    @media screen and (min-width: 767px) {
+        .login-container {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            width: 350px;
+            text-align: center;
+            height: 400px;
+            margin-top: 50px;
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        .login-container {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            width: 250px;
+            text-align: center;
+            height: 400px;
+            margin-top: 50px;
+
+        }
+    }
+
+
+    .login-container h2 {
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: baseline;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    .form-group label {
+        display: block;
+        font-size: 1em;
+    }
+
+    .form-group input {
+        width: 90%;
+        padding: 8px;
+        font-size: 16px;
+        border: 1px solid #444;
+        border-radius: 4px;
+        background-color: #333;
+        color: #fff;
+        margin-bottom: 20px;
+        margin-top: 5px;
+    }
+
+    .form-group input:focus {
+        outline: none;
+        border-color: #61dafb;
+    }
+
+    .login-btn {
+        width: 70%;
+        padding: 10px;
+        background-color: #61dafb;
+        color: #121212;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        place-self: center;
+        transition: background-color 0.3s ease;
+    }
+
+    .login-btn:hover {
+        background-color: #4fa3d1;
+    }
+
+    .login_form {
+        display: flex;
+        flex-direction: column;
+        height: 300px;
+        align-items: center;
+    }
+
+    .alert {
+        color: #d43f3a;
+        font-size: .8em;
+        padding: 10px;
+        margin-bottom: 5px;
+    }
+
+    .alert-success {
+        color: #4cae4c !important;
+        font-size: .8em !important;
+        padding: 10px !important;
+    }
+</style>
+
+
+{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <h2>Login</h2>
+    <form class="login_form" method="post" action="{% url 'core:login' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        {% if messages %}
+        {% for message in messages %}
+        {% if forloop.first %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        <button type="submit" class="login-btn">Login</button>
+
+    </form>
+
+
+    <p>Don't have an account? <a href="{% url 'core:register' %}" style="font-size: larger;
+        font-style: italic;"><b style="color: aquamarine;">Register</b></a></p>
+</div>
+{% endblock %}

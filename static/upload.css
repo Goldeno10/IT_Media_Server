@@ -1,0 +1,53 @@
+.container {
+    max-width: 900px;
+}
+
+.mb-4,
+.my-4 {
+    margin-bottom: 1.5rem !important;
+    margin-left: 2em !important;
+}
+
+.form-column {
+    width: 100%;
+}
+
+input[type="text"],
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.btn-dark-theme {
+    background-color: #333;
+    color: #fff;
+    border-color: #555;
+    width: 300px;
+    float: inline-end;
+}
+
+.btn-dark-theme:hover {
+    background-color: #555;
+}
+
+.invalid-feedback {
+    display: block;
+    color: #dc3545;
+    margin-top: 5px;
+}
+
+
+@media (max-width: 768px) {
+    .col-md-6 {
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 100%;
+    }
+
+    .btn-dark-theme {
+        float: inline-start;
+        width: 200px;
+        margin-left: 1em;
+    }
+}

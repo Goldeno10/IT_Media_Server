@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- {% load crispy_forms_tags %} -->
+
+{% block head %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="{% static 'upload.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Upload Media</h2>
+
+    <!-- Media Upload Form -->
+    <form method="post" enctype="multipart/form-data" action="{% url 'media:upload' %}" class="needs-validation"
+        novalidate>
+        {% csrf_token %}
+
+        <!-- Form Fields -->
+        <div class="form-column">
+            <div class="col-md-6 mb-3">
+                {{ upload_form.title|as_crispy_field }}
+            </div>
+            <div class="col-md-6 mb-3">
+                {{ upload_form.description|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-12 mb-3" style="padding: 1em;">
+                {{ upload_form.file|as_crispy_field }}
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-dark-theme">Upload</button>
+    </form>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+{% endblock %}

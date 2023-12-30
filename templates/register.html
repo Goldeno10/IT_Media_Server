@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block head %}
+
+<style>
+    @media screen and (min-width: 767px) {
+        .registration-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            width: 400px;
+            text-align: center;
+            height: 600px;
+            margin-top: 50px;
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        .registration-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            width: 290px;
+            text-align: center;
+            height: 600px;
+            margin-top: 50px;
+        }
+    }
+
+
+    .registration-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .registration-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .registration-form input {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 90%;
+    }
+
+    .register-btn {
+        width: 70%;
+        padding: 10px;
+        background-color: #61dafb;
+        color: #121212;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        place-self: center;
+        transition: background-color 0.3s ease;
+    }
+
+    .register-btn:hover {
+        background-color: #218838;
+    }
+
+    .registration-form {
+        display: flex;
+        flex-direction: column;
+        height: -webkit-fill-available;
+        justify-content: flex-start;
+        align-items: baseline;
+        width: -webkit-fill-available;
+        padding: 10px;
+        flex: auto;
+    }
+
+    .mb-3 {
+        margin-bottom: 0px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: baseline;
+        padding: 10px;
+    }
+
+    .text-danger {
+        color: red;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="registration-container">
+    <h2>Register</h2>
+    <form class="registration-form" method="post" action="{% url 'core:register' %}">
+        {% csrf_token %}
+
+        <!-- Username -->
+        <div class="mb-3">
+            <label for="{{ form.username.id_for_label }}">Username:</label>
+            {{ form.username }}
+            {% if form.username.errors %}
+            <div class="text-danger">
+                {{ form.username.errors|join:", " }}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+            <label for="{{ form.email.id_for_label }}">Email:</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+            <div class="text-danger">
+                {{ form.email.errors|join:", " }}
+            </div>
+            {% endif %}
+        </div>
+        <!-- Password -->
+        <div class="mb-3">
+            <label for="{{ form.password1.id_for_label }}">Password:</label>
+            {{ form.password1 }}
+            {% if form.password1.errors %}
+            <div class="text-danger">
+                {{ form.password1.errors|join:", " }}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Password confirmation -->
+        <div class="mb-3">
+            <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
+            {{ form.password2 }}
+            {% if form.password2.errors %}
+            <div class="text-danger">
+                {{ form.password2.errors|join:", " }}
+            </div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="register-btn">Register</button>
+    </form>
+    <p>Already have an account? <a href="{% url 'core:login' %}" style="font-size: larger;
+        font-style: italic;"><b style="color: aquamarine;">Login</b></a></p>
+</div>
+{% endblock %}
